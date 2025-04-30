@@ -1,4 +1,4 @@
-# Renamable Ships
+# Renameable Ships
 [Nexusmods]()  
 <br>
 You can now rename your ships with a new button in the docking bay ui.
