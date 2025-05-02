@@ -23,7 +23,7 @@ public class Plugin : BasePlugin
 {
     private const string Guid = "captnced.RenameableShips";
     private const string Name = "RenameableShips";
-    private const string Version = "1.0.0-alpha";
+    private const string Version = "1.0.0";
     internal new static ManualLogSource Log;
 
     public override void Load()
