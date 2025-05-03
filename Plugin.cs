@@ -23,7 +23,7 @@ public class Plugin : BasePlugin
 {
     private const string Guid = "captnced.RenameableShips";
     private const string Name = "RenameableShips";
-    private const string Version = "1.0.0";
+    private const string Version = "1.0.1";
     internal new static ManualLogSource Log;
 
     public override void Load()
@@ -51,7 +51,7 @@ internal class RenamableShipsManager
         var ships = new List<UIWindowBuildingDockingBaySinglePlatform>();
         ships.AddRange(shipPlatformDisplay.GetComponentsInChildren<UIWindowBuildingDockingBaySinglePlatform>());
         foreach (var ship in ships)
-            if (ship.unassignButton.gameObject.active)
+            if (!ship.transform.FindChild("Buttons").FindChild("Rename"))
             {
                 if (ship.unassignButton.transform.parent.childCount > 2) return;
                 var newButton = Object.Instantiate(ship.unassignButton, ship.unassignButton.transform.parent);
@@ -64,6 +64,18 @@ internal class RenamableShipsManager
                 newButton.transform.parent.localPosition = new Vector3(-14, -35, 0);
                 loadButtonTexture(newButton);
             }
+    }
+
+    internal static void showRenameButton(UIWindowBuildingDockingBaySinglePlatform platform)
+    {
+        var rename = platform.transform.FindChild("Buttons").FindChild("Rename");
+        if (!rename == false)
+        {
+            if (platform.GetComponent<UIWindowBuildingDockingBaySinglePlatform>().spaceVehicleInstance != null)
+                rename.gameObject.SetActive(true);
+            else
+                rename.gameObject.SetActive(false);
+        }
     }
 
     internal static void loadButtonTexture(UiButton button)

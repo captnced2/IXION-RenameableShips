@@ -30,4 +30,14 @@ public class Patches
             }
         }
     }
+
+    [HarmonyPatch(typeof(UIWindowBuildingDockingBaySinglePlatform),
+        nameof(UIWindowBuildingDockingBaySinglePlatform.SetSpaceVehicle))]
+    public static class DockingBaySinglePlatformPatcher
+    {
+        public static void Postfix(UIWindowBuildingDockingBaySinglePlatform __instance)
+        {
+            RenamableShipsManager.showRenameButton(__instance);
+        }
+    }
 }
