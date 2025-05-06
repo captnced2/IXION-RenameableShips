@@ -30,11 +30,11 @@
         <Reference Include="BulwarkStudios.Utils">
             <HintPath>libs\BulwarkStudios.Utils.dll</HintPath>
         </Reference>
-        <Reference Include="I2Localization">
-            <HintPath>libs\I2Localization.dll</HintPath>
-        </Reference>
         <Reference Include="Il2Cppmscorlib">
             <HintPath>libs\Il2Cppmscorlib.dll</HintPath>
+        </Reference>
+        <Reference Include="IMHelper">
+            <HintPath>libs\IMHelper.dll</HintPath>
         </Reference>
         <Reference Include="Sirenix.Serialization">
             <HintPath>libs\Sirenix.Serialization.dll</HintPath>
