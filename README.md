@@ -1,5 +1,5 @@
 # Renameable Ships
-[Nexusmods]()  
+[Nexusmods](https://www.nexusmods.com/ixion/mods/14)  
 <br>
 You can now rename your ships with a new button in the docking bay ui.
 > [!WARNING]
