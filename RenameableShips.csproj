@@ -34,7 +34,7 @@
             <HintPath>libs\Il2Cppmscorlib.dll</HintPath>
         </Reference>
         <Reference Include="IMHelper">
-            <HintPath>libs\IMHelper.dll</HintPath>
+          <HintPath>libs\IMHelper.dll</HintPath>
         </Reference>
         <Reference Include="Sirenix.Serialization">
             <HintPath>libs\Sirenix.Serialization.dll</HintPath>

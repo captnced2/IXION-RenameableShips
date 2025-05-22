@@ -17,24 +17,48 @@ public class Plugin : BasePlugin
 {
     private const string Guid = "captnced.RenameableShips";
     private const string Name = "RenameableShips";
-    private const string Version = "2.0.0";
+    private const string Version = "2.1.0";
     internal new static ManualLogSource Log;
+    private static Harmony harmony;
+    private static bool enabled;
 
     public override void Load()
     {
         Log = base.Log;
-        var harmony = new Harmony(Guid);
+        harmony = new Harmony(Guid);
+        if (IL2CPPChainloader.Instance.Plugins.ContainsKey("captnced.IMHelper")) enabled = ModsMenu.isSelfEnabled();
+        if (!enabled)
+            Log.LogInfo("Disabled by IMHelper!");
+        else
+            init();
+    }
+
+    private static void init()
+    {
         harmony.PatchAll();
         foreach (var patch in harmony.GetPatchedMethods())
             Log.LogInfo("Patched " + patch.DeclaringType + ":" + patch.Name);
         Log.LogInfo("Loaded \"" + Name + "\" version " + Version + "!");
     }
+
+    private static void disable()
+    {
+        harmony.UnpatchSelf();
+        Log.LogInfo("Unloaded \"" + Name + "\" version " + Version + "!");
+    }
+    
+    public static void enable(bool value)
+    {
+        enabled = value;
+        if (enabled) init();
+        else disable();
+    }
 }
 
-internal class RenamableShipsManager
+internal static class RenamableShipsManager
 {
     private static Transform currentPlatform;
-    private static List<ButtonHelper.Button> buttons = new();
+    private static readonly List<ButtonHelper.Button> buttons = [];
 
     internal static void AddButtons(Transform shipPlatformDisplay)
     {
@@ -43,7 +67,7 @@ internal class RenamableShipsManager
         foreach (var ship in ships)
             if (!ship.transform.FindChild("Buttons").FindChild("Rename"))
             {
-                var renameButton = new ButtonHelper.Button("Rename", ship.unassignButton.transform,
+                var renameButton = new ButtonHelper.IconButton("Rename", ship.unassignButton.transform,
                     ship.unassignButton.transform.parent, TriggerRename,
                     typeof(Plugin).Assembly.GetManifestResourceStream("RenameableShips.assets.Rename.png"), "Rename");
                 renameButton.createButton();
